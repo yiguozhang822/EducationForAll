@@ -3,10 +3,10 @@
 EducationForAll is a student-led platform created to empower Priory students to learn, teach, and grow together. At its core, the site allows students to support one another by sharing review videos specifically tailored to our school’s curriculum. Whether it's explaining a math problem, analyzing a reading, or breaking down a science concept, students can upload their YouTube links, categorize them by class, and include titles and descriptions—making the content easy to find and aligned with what’s taught in class.  
 
 ## Contributors
-Founder & Team Leader [@yiguozhang822](github.com/yiguozhang822)  
+Founder & Team Leader [@yiguozhang822](https://github.com/yiguozhang822)  
 -- He was the person who came up with the idea of the project. He organized the teams to execute [EducationForAll](#EducationForAll) effectively.<br/>  
 
-Chief Project Architecture Engineer [@williamwutq](github.com/williamwutq)  
+Chief Project Architecture Engineer [@williamwutq](https://github.com/williamwutq)  
 -- He was responsible for designing the overall architecture, algorithm, and data interfacing and storage of this web-based program.<br/>  
 
 
