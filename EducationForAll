@@ -1,0 +1,415 @@
+<!-- Education For All is an innovative corporation founded by Yiguo Zhang, below are his original, demonstrational code-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>EducationForAll.com</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #121212;
+      color: #eee;
+    }
+    h2 { margin-top: 40px; color: #fff; }
+    .section {
+      background: #1e1e1e;
+      border: 1px solid #333;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.6);
+    }
+    .form-control { margin: 10px 0; }
+    .input, .input-alt {
+      width: 100%;
+      padding: 0.7em;
+      background-color: #333;
+      color: #eee;
+      border: none;
+      border-radius: 4px;
+      border-bottom: 2px solid #555;
+    }
+    .input:focus, .input-alt:focus {
+      outline: none;
+      border-bottom-color: #47C9FF;
+    }
+    button {
+      margin: 10px 5px 0 0;
+      padding: 10px 20px;
+      font-size: 1rem;
+      background-color: #47C9FF;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .video-card {
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 6px;
+      padding: 15px;
+      margin: 10px 0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.6);
+    }
+    .video-card p { margin: 5px 0; color: #ccc; }
+    .tab { margin-top: 20px; }
+    .category-button {
+      margin: 5px;
+      padding: 8px 14px;
+      font-size: 0.9rem;
+      background-color: #555;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Priory Badge -->
+<div style="position: fixed; top: 15px; right: 15px; z-index: 1000;">
+  <img src="https://massinteract.com/woodside-priory-school/skin/Image_729BA7B9_3AB7_6CF1_41BF_2241E6209530.png?v=1633962102334" 
+       alt="Priory Badge" 
+       style="height: 60px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.4);">
+</div>
+
+
+  <h2>EducationForAll.com</h2>
+  <div class="tab">
+    <button onclick="showTab('registerLogin')">Register/Login</button>
+    <button onclick="showTab('videoSubmit')">Submit Video</button>
+    <button onclick="showTab('searchVideos')">Search</button>
+    <button onclick="showTab('categoryList')">Categories</button>
+    <button onclick="showTab('aboutUs')">About Us</button>
+  </div>
+
+  <div id="registerLogin" class="section">
+    <h3>Register / Login</h3>
+    <div class="form-control"><input class="input" id="regUsername" placeholder="Username"></div>
+    <div class="form-control"><input class="input" type="password" id="regPassword" placeholder="Password"></div>
+    <div class="form-control"><input class="input" id="regRealName" placeholder="Real Name"></div>
+    <button onclick="registerUser()">Register</button>
+    <br>
+    <div class="form-control"><input class="input" id="loginUsername" placeholder="Username"></div>
+    <div class="form-control"><input class="input" type="password" id="loginPassword" placeholder="Password"></div>
+    <button onclick="loginUser()">Login</button>
+    <p id="currentUserDisplay"></p>
+  </div>
+
+  <div id="videoSubmit" class="section" style="display:none;">
+    <h3>Submit a Study Video</h3>
+    <div class="form-control"><input class="input" id="videoLink" placeholder="Paste YouTube Link"></div>
+    <div class="form-control"><input class="input" id="videoTitle" placeholder="Video Title"></div>
+    <div class="form-control"><input class="input" id="videoDescription" placeholder="Description"></div>
+    <div class="form-control">
+<!-- START: Class Dropdown Options -->
+<select class="input-alt" id="classSelect">
+  <option value="Algorithms">Algorithms</option>
+  <option value="AP Computer Science">AP Computer Science</option>
+  <option value="Artificial Intelligence">Artificial Intelligence</option>
+  <option value="CAD Product Design I">CAD Product Design I</option>
+  <option value="CAD Product Design II">CAD Product Design II</option>
+  <option value="Intro to Computer Science">Intro to Computer Science</option>
+  <option value="Machine Learning">Machine Learning</option>
+  <option value="Multimedia Production">Multimedia Production</option>
+
+  <option value="Algebra I">Algebra I</option>
+  <option value="Algebra II">Algebra II</option>
+  <option value="Algebra II H">Algebra II H</option>
+  <option value="AP Calculus AB">AP Calculus AB</option>
+  <option value="AP Calculus BC">AP Calculus BC</option>
+  <option value="AP Statistics">AP Statistics</option>
+  <option value="Discrete Mathematics">Discrete Mathematics</option>
+  <option value="Geometry">Geometry</option>
+  <option value="Geometry H">Geometry H</option>
+  <option value="Precalculus">Precalculus</option>
+  <option value="Precalculus H">Precalculus H</option>
+  <option value="Precalculus Principles">Precalculus Principles</option>
+
+  <option value="AP Chemistry">AP Chemistry</option>
+  <option value="AP Environmental Science">AP Environmental Science</option>
+  <option value="AP Physics C: Mechanics">AP Physics C: Mechanics</option>
+  <option value="Chemistry">Chemistry</option>
+  <option value="Chemistry H">Chemistry H</option>
+  <option value="Marine Biology">Marine Biology</option>
+  <option value="Physics">Physics</option>
+  <option value="Physics H">Physics H</option>
+  <option value="Biology">Biology</option>
+  <option value="Biology H">Biology H</option>
+  <option value="Health and Wellness">Health and Wellness</option>
+  <option value="Understanding Climate Change">Understanding Climate Change</option>
+  <option value="Extreme Physics">Extreme Physics</option>
+  <option value="Sports Medicine">Sports Medicine</option>
+
+  <option value="AP English Literature">AP English Literature</option>
+  <option value="Junior/Senior Elective">Junior/Senior Elective</option>
+  <option value="20th Century Drama">20th Century Drama</option>
+  <option value="Award Winners Now!">Award Winners Now!</option>
+  <option value="Banned Books">Banned Books</option>
+  <option value="Discourse of Dining">Discourse of Dining</option>
+  <option value="Gothic Literature">Gothic Literature</option>
+  <option value="Literature Through the Camera Lens">Literature Through the Camera Lens</option>
+  <option value="Short Stories">Short Stories</option>
+  <option value="Witness, Voice and Advocacy">Witness, Voice and Advocacy</option>
+  <option value="English Foundations I">English Foundations I</option>
+  <option value="English Foundations II">English Foundations II</option>
+
+  <option value="AP French">AP French</option>
+  <option value="AP Spanish Language">AP Spanish Language</option>
+  <option value="AP Spanish Literature">AP Spanish Literature</option>
+  <option value="French I">French I</option>
+  <option value="French II">French II</option>
+  <option value="French III">French III</option>
+  <option value="French IV H">French IV H</option>
+  <option value="Mandarin I">Mandarin I</option>
+  <option value="Mandarin II">Mandarin II</option>
+  <option value="Mandarin III">Mandarin III</option>
+  <option value="Mandarin IV H">Mandarin IV H</option>
+  <option value="Mandarin V H">Mandarin V H</option>
+  <option value="Spanish I">Spanish I</option>
+  <option value="Spanish II">Spanish II</option>
+  <option value="Spanish III">Spanish III</option>
+  <option value="Spanish IV H">Spanish IV H</option>
+
+  <option value="Christian Scriptures">Christian Scriptures</option>
+  <option value="Pop Goes Religion">Pop Goes Religion</option>
+  <option value="Social Justice">Social Justice</option>
+  <option value="Sacred Art">Sacred Art</option>
+  <option value="Virtue Ethics">Virtue Ethics</option>
+  <option value="World Religions">World Religions</option>
+  <option value="Basic Beliefs and Values">Basic Beliefs and Values</option>
+  <option value="Hebrew Scriptures">Hebrew Scriptures</option>
+
+  <option value="AT: Contemporary Issues in American Governance">AT: Contemporary Issues in American Governance</option>
+  <option value="AT: Economics">AT: Economics</option>
+  <option value="AT: European History">AT: European History</option>
+  <option value="AT: International Law and Its Legal Mosaic">AT: International Law and Its Legal Mosaic</option>
+  <option value="AT: US History">AT: US History</option>
+  <option value="American Democracy">American Democracy</option>
+  <option value="US History">US History</option>
+  <option value="Global Issues">Global Issues</option>
+  <option value="Psychology">Psychology</option>
+  <option value="World History">World History</option>
+  <option value="World History H">World History H</option>
+
+  <option value="Applied Calculus">Applied Calculus</option>
+  <option value="Linear Algebra">Linear Algebra</option>
+  <option value="Multivariable Calculus">Multivariable Calculus</option>
+  <option value="Bioethics">Bioethics</option>
+  <option value="The Holocaust">The Holocaust</option>
+  <option value="Digital Photography">Digital Photography</option>
+  <option value="Transcendentalists and Beats">Transcendentalists and Beats</option>
+</select>
+<!-- END: Class Dropdown Options -->
+    </div>
+    <button onclick="submitVideo()">Submit Video</button>
+  </div>
+
+ <!-- START: Category Buttons -->
+<div id="categoryList" class="section" style="display:none;">
+  <h3>Browse by Course</h3>
+  <div>
+    <!-- Computer Science -->
+    <button class="category-button" onclick="filterByCategory('Algorithms')">Algorithms</button>
+    <button class="category-button" onclick="filterByCategory('AP Computer Science')">AP Computer Science</button>
+    <button class="category-button" onclick="filterByCategory('Artificial Intelligence')">Artificial Intelligence</button>
+    <button class="category-button" onclick="filterByCategory('CAD Product Design I')">CAD Product Design I</button>
+    <button class="category-button" onclick="filterByCategory('CAD Product Design II')">CAD Product Design II</button>
+    <button class="category-button" onclick="filterByCategory('Intro to Computer Science')">Intro to Computer Science</button>
+    <button class="category-button" onclick="filterByCategory('Machine Learning')">Machine Learning</button>
+    <button class="category-button" onclick="filterByCategory('Multimedia Production')">Multimedia Production</button>
+
+    <!-- Math -->
+    <button class="category-button" onclick="filterByCategory('Algebra I')">Algebra I</button>
+    <button class="category-button" onclick="filterByCategory('Algebra II')">Algebra II</button>
+    <button class="category-button" onclick="filterByCategory('AP Calculus AB')">AP Calculus AB</button>
+    <button class="category-button" onclick="filterByCategory('AP Calculus BC')">AP Calculus BC</button>
+    <button class="category-button" onclick="filterByCategory('AP Statistics')">AP Statistics</button>
+    <button class="category-button" onclick="filterByCategory('Discrete Mathematics')">Discrete Mathematics</button>
+    <button class="category-button" onclick="filterByCategory('Geometry')">Geometry</button>
+    <button class="category-button" onclick="filterByCategory('Precalculus')">Precalculus</button>
+
+    <!-- Science -->
+    <button class="category-button" onclick="filterByCategory('AP Chemistry')">AP Chemistry</button>
+    <button class="category-button" onclick="filterByCategory('AP Environmental Science')">AP Environmental Science</button>
+    <button class="category-button" onclick="filterByCategory('AP Physics C: Mechanics')">AP Physics C: Mechanics</button>
+    <button class="category-button" onclick="filterByCategory('Chemistry')">Chemistry</button>
+    <button class="category-button" onclick="filterByCategory('Marine Biology')">Marine Biology</button>
+    <button class="category-button" onclick="filterByCategory('Physics')">Physics</button>
+    <button class="category-button" onclick="filterByCategory('Biology')">Biology</button>
+    <button class="category-button" onclick="filterByCategory('Health and Wellness')">Health and Wellness</button>
+    <button class="category-button" onclick="filterByCategory('Understanding Climate Change')">Understanding Climate Change</button>
+    <button class="category-button" onclick="filterByCategory('Extreme Physics')">Extreme Physics</button>
+    <button class="category-button" onclick="filterByCategory('Sports Medicine')">Sports Medicine</button>
+
+    <!-- English -->
+    <button class="category-button" onclick="filterByCategory('AP English Literature')">AP English Literature</button>
+    <button class="category-button" onclick="filterByCategory('20th Century Drama')">20th Century Drama</button>
+    <button class="category-button" onclick="filterByCategory('Award Winners Now!')">Award Winners Now!</button>
+    <button class="category-button" onclick="filterByCategory('Banned Books')">Banned Books</button>
+    <button class="category-button" onclick="filterByCategory('Discourse of Dining')">Discourse of Dining</button>
+    <button class="category-button" onclick="filterByCategory('Gothic Literature')">Gothic Literature</button>
+    <button class="category-button" onclick="filterByCategory('Literature Through the Camera Lens')">Literature Through the Camera Lens</button>
+    <button class="category-button" onclick="filterByCategory('Short Stories')">Short Stories</button>
+    <button class="category-button" onclick="filterByCategory('Witness, Voice and Advocacy')">Witness, Voice and Advocacy</button>
+    <button class="category-button" onclick="filterByCategory('English Foundations I')">English Foundations I</button>
+    <button class="category-button" onclick="filterByCategory('English Foundations II')">English Foundations II</button>
+
+    <!-- Languages -->
+    <button class="category-button" onclick="filterByCategory('French')">French</button>
+    <button class="category-button" onclick="filterByCategory('Mandarin')">Mandarin</button>
+    <button class="category-button" onclick="filterByCategory('Spanish')">Spanish</button>
+
+    <!-- Theology -->
+    <button class="category-button" onclick="filterByCategory('Christian Scriptures')">Christian Scriptures</button>
+    <button class="category-button" onclick="filterByCategory('Pop Goes Religion')">Pop Goes Religion</button>
+    <button class="category-button" onclick="filterByCategory('Social Justice')">Social Justice</button>
+    <button class="category-button" onclick="filterByCategory('Sacred Art')">Sacred Art</button>
+    <button class="category-button" onclick="filterByCategory('Virtue Ethics')">Virtue Ethics</button>
+    <button class="category-button" onclick="filterByCategory('World Religions')">World Religions</button>
+    <button class="category-button" onclick="filterByCategory('Basic Beliefs and Values')">Basic Beliefs and Values</button>
+    <button class="category-button" onclick="filterByCategory('Hebrew Scriptures')">Hebrew Scriptures</button>
+
+    <!-- Social Science -->
+    <button class="category-button" onclick="filterByCategory('AT: Contemporary Issues in American Governance')">AT: Contemporary Issues in American Governance</button>
+    <button class="category-button" onclick="filterByCategory('AT: Economics')">AT: Economics</button>
+    <button class="category-button" onclick="filterByCategory('AT: European History')">AT: European History</button>
+    <button class="category-button" onclick="filterByCategory('AT: International Law and Its Legal Mosaic')">AT: International Law and Its Legal Mosaic</button>
+    <button class="category-button" onclick="filterByCategory('AT: US History')">AT: US History</button>
+    <button class="category-button" onclick="filterByCategory('American Democracy')">American Democracy</button>
+    <button class="category-button" onclick="filterByCategory('US History')">US History</button>
+    <button class="category-button" onclick="filterByCategory('Global Issues')">Global Issues</button>
+    <button class="category-button" onclick="filterByCategory('Psychology')">Psychology</button>
+    <button class="category-button" onclick="filterByCategory('World History')">World History</button>
+
+  </div>
+</div>
+<!-- END: Category Buttons -->
+
+
+  </div>
+
+  <div id="searchVideos" class="section" style="display:none;">
+    <h3>Search Videos</h3>
+    <div class="form-control"><input class="input" id="searchInput" placeholder="Search by title, subject, description, or uploader"></div>
+    <button onclick="searchVideos()">Search</button>
+    <h3>All Videos</h3>
+    <div id="videoList"></div>
+  </div>
+
+  <script>
+    const users = {};
+    const videos = [];
+    let currentUser = null;
+
+    class Video {
+      constructor(owner, realName, link, title, desc, subject) {
+        this.owner = owner;
+        this.realName = realName;
+        this.link = link;
+        this.title = title;
+        this.desc = desc;
+        this.subject = subject;
+      }
+    }
+
+    function showTab(tabId) {
+      ['registerLogin', 'videoSubmit', 'searchVideos', 'categoryList', 'aboutUs'].forEach(id => {
+        document.getElementById(id).style.display = 'none';
+      });
+      document.getElementById(tabId).style.display = 'block';
+    }
+
+    function registerUser() {
+      const u = document.getElementById('regUsername').value;
+      const p = document.getElementById('regPassword').value;
+      const r = document.getElementById('regRealName').value;
+      if (!u || !p || !r) return alert('Fill all fields');
+      if (users[u]) return alert('Username taken');
+      users[u] = { password: p, realName: r };
+      alert('Registered');
+    }
+
+    function loginUser() {
+      const u = document.getElementById('loginUsername').value;
+      const p = document.getElementById('loginPassword').value;
+      if (!users[u] || users[u].password !== p) return alert('Invalid credentials');
+      currentUser = u;
+      document.getElementById('currentUserDisplay').innerText = `Logged in as: ${u}`;
+    }
+
+    function submitVideo() {
+      const link = document.getElementById('videoLink').value;
+      const title = document.getElementById('videoTitle').value;
+      const desc = document.getElementById('videoDescription').value;
+      const subject = document.getElementById('classSelect').value;
+      if (!currentUser) return alert('Login first');
+      if (!link || !title || !desc) return alert('Fill all fields');
+      videos.push(new Video(currentUser, users[currentUser].realName, link, title, desc, subject));
+      renderVideos(videos);
+    }
+
+    function searchVideos() {
+      const kw = document.getElementById('searchInput').value.toLowerCase();
+      const filtered = videos.filter(v =>
+        v.title.toLowerCase().includes(kw) ||
+        v.desc.toLowerCase().includes(kw) ||
+        v.subject.toLowerCase().includes(kw) ||
+        v.owner.toLowerCase().includes(kw) ||
+        v.realName.toLowerCase().includes(kw)
+      );
+      renderVideos(filtered);
+    }
+
+    function filterByCategory(category) {
+      showTab('searchVideos');
+      document.getElementById('searchInput').value = category;
+      searchVideos();
+    }
+
+    function renderVideos(list) {
+      const container = document.getElementById('videoList');
+      container.innerHTML = '';
+      list.forEach(video => {
+        const card = document.createElement('div');
+        card.className = 'video-card';
+        card.innerHTML = `
+          <p><strong>Title:</strong> ${video.title}</p>
+          <p><a href="${video.link}" target="_blank">Watch Video</a></p>
+          <p>${video.desc}</p>
+          <p><strong>Subject:</strong> ${video.subject}</p>
+          <p><strong>Uploaded by:</strong> ${video.realName} (${video.owner})</p>
+        `;
+        container.appendChild(card);
+      });
+    }
+  </script>
+<div id="aboutUs" class="section" style="display:none;">
+  <h3>About EducationForAll</h3>
+  <p>
+    EducationForAll.com is a platform founded by Yiguo Zhang to help Priory students learn from each other 
+    through shared study videos. Whether you're reviewing for an exam or just trying to better understand a lesson, 
+    this platform offers peer-made videos organized by course and topic.
+  </p>
+  <p>
+    Students can submit videos, browse by subject, and earn service hours for contributing helpful content.
+  </p>
+<p>
+     —Presented by East Priory Company©
+  </p>
+  <h4>Team Members</h4>
+  <ul>
+    <li>Yiguo Zhang—Founder and backend developer</li>
+    <li>Marcus Guo—Backend developer</li>
+    <li>Bennett Huang—Frontend developer</li>
+
+
+  </ul>
+</div>
+
+</body>
+</html>
+
+
