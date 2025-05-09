@@ -4,7 +4,7 @@ EducationForAll is a student-led platform created to empower Priory students to 
 
 ## Contributors
 Founder & Team Leader [@yiguozhang822](https://github.com/yiguozhang822)  
--- He was the person who came up with the idea of the project. He organized the teams to execute [EducationForAll](#EducationForAll) effectively.<br/>  
+-- He was the person who came up with the idea of the project. He led the formation and coordination of teams to ensure the effective execution of [EducationForAll](#EducationForAll).<br/>  
 
 Chief Project Architecture Engineer [@williamwutq](https://github.com/williamwutq)  
 -- He was responsible for designing the overall architecture, algorithm, and data interfacing and storage of this web-based program.<br/>  
