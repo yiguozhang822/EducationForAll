@@ -1,4 +1,7 @@
 # EducationForAll
+
+> An [East Priory Company](https://www.theeastpriorycompany.com/) Project, originated from [Priory](https://www.prioryca.org/) students.
+
 ## Description  
 EducationForAll is a student-led platform created to empower Priory students to learn, teach, and grow together. At its core, the site allows students to support one another by sharing review videos specifically tailored to our school’s curriculum. Whether it's explaining a math problem, analyzing a reading, or breaking down a science concept, students can upload their YouTube links, categorize them by class, and include titles and descriptions—making the content easy to find and aligned with what’s taught in class.  
 
