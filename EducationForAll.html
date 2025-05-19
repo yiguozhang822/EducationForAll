@@ -95,7 +95,7 @@
   <h2>EducationForAll.com</h2>
   <div class="tab">
     <button onclick="showTab('registerLogin')">Register/Login</button>
-    <button onclick="showTab('videoSubmit')">Submit Video</button>
+    <button onclick="showTab('videoSubmit')">Submit</button>
     <button onclick="showTab('searchVideos')">Search</button>
     <button onclick="showTab('categoryList')">Categories</button>
     <button onclick="showTab('aboutUs')">About Us</button>
@@ -220,7 +220,7 @@
 </select>
 <!-- END: Class Dropdown Options -->
     </div>
-    <button onclick="submitVideo()">Submit Video</button>
+    <button onclick="submitVideo()">Submit</button>
   </div>
 
  <!-- START: Category Buttons -->
@@ -308,10 +308,10 @@
   </div>
 
   <div id="searchVideos" class="section" style="display:none;">
-    <h3>Search Videos</h3>
+    <h3>Search</h3>
     <div class="form-control"><input class="input" id="searchInput" placeholder="Search by title, subject, description, or uploader"></div>
     <button onclick="searchVideos()">Search</button>
-    <h3>All Videos</h3>
+    <h3>Search Results</h3>
     <div id="videoList"></div>
   </div>
 
@@ -355,6 +355,12 @@
       currentUser = u;
       document.getElementById('currentUserDisplay').innerText = `Logged in as: ${u}`;
     }
+function getYouTubeID(url) {
+  // grabs the “v=” or youtu.be/XXXXXXXXXXX
+  const regExp = /^.*(?:youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=)([^#\&\?]*).*/;
+  const match = url.match(regExp);
+  return (match && match[1].length === 11) ? match[1] : null;
+}
 
     function submitVideo() {
       const link = document.getElementById('videoLink').value;
@@ -385,22 +391,56 @@
       searchVideos();
     }
 
-    function renderVideos(list) {
-      const container = document.getElementById('videoList');
-      container.innerHTML = '';
-      list.forEach(video => {
-        const card = document.createElement('div');
-        card.className = 'video-card';
-        card.innerHTML = `
-          <p><strong>Title:</strong> ${video.title}</p>
-          <p><a href="${video.link}" target="_blank">Watch Video</a></p>
-          <p>${video.desc}</p>
-          <p><strong>Subject:</strong> ${video.subject}</p>
-          <p><strong>Uploaded by:</strong> ${video.realName} (${video.owner})</p>
-        `;
-        container.appendChild(card);
-      });
+function renderVideos(list) {
+  const container = document.getElementById('videoList');
+  container.innerHTML = '';
+  list.forEach(video => {
+    const card = document.createElement('div');
+    card.className = 'video-card';
+
+    let mediaHTML;
+
+    if (video.link.includes('embed')) {
+      // if they pasted a link that already has "embed" (like a Google Docs embed URL)
+      mediaHTML = `
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;">
+          <iframe
+            src="${video.link}"
+            frameborder="0"
+            allowfullscreen
+            style="position:absolute;top:0;left:0;width:100%;height:100%;">
+          </iframe>
+        </div>`;
+    } else {
+      // otherwise try YouTube ID
+      const id = getYouTubeID(video.link);
+      if (id) {
+        mediaHTML = `
+          <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;">
+            <iframe
+              src="https://www.youtube.com/embed/${id}"
+              frameborder="0"
+              allowfullscreen
+              style="position:absolute;top:0;left:0;width:100%;height:100%;">
+            </iframe>
+          </div>`;
+      } else {
+        // fallback: just a link
+        mediaHTML = `<p><a href="${video.link}" target="_blank">View Content</a></p>`;
+      }
     }
+
+    card.innerHTML = `
+      <p><strong>Title:</strong> ${video.title}</p>
+      ${mediaHTML}
+      <p>${video.desc}</p>
+      <p><strong>Subject:</strong> ${video.subject}</p>
+      <p><strong>Uploaded by:</strong> ${video.realName} (${video.owner})</p>
+    `;
+    container.appendChild(card);
+  });
+}
+
   </script>
 <div id="aboutUs" class="section" style="display:none;">
   <h3>About EducationForAll</h3>
