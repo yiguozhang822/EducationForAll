@@ -80,6 +80,14 @@
       border-radius: 4px;
       cursor: pointer;
     }
+    .video-card button {
+  background: #e74c3c;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  margin-top: 8px;
+}
+
   </style>
 </head>
 <body>
@@ -95,7 +103,7 @@
   <h2>EducationForAll.com</h2>
   <div class="tab">
     <button onclick="showTab('registerLogin')">Register/Login</button>
-    <button onclick="showTab('videoSubmit')">Submit</button>
+    <button onclick="showTab('videoSubmit')">Submit Video</button>
     <button onclick="showTab('searchVideos')">Search</button>
     <button onclick="showTab('categoryList')">Categories</button>
     <button onclick="showTab('aboutUs')">About Us</button>
@@ -220,7 +228,7 @@
 </select>
 <!-- END: Class Dropdown Options -->
     </div>
-    <button onclick="submitVideo()">Submit</button>
+    <button onclick="submitVideo()">Submit Video</button>
   </div>
 
  <!-- START: Category Buttons -->
@@ -308,10 +316,10 @@
   </div>
 
   <div id="searchVideos" class="section" style="display:none;">
-    <h3>Search</h3>
+    <h3>Search Videos</h3>
     <div class="form-control"><input class="input" id="searchInput" placeholder="Search by title, subject, description, or uploader"></div>
     <button onclick="searchVideos()">Search</button>
-    <h3>Search Results</h3>
+    <h3>All Videos</h3>
     <div id="videoList"></div>
   </div>
 
@@ -355,12 +363,6 @@
       currentUser = u;
       document.getElementById('currentUserDisplay').innerText = `Logged in as: ${u}`;
     }
-function getYouTubeID(url) {
-  // grabs the “v=” or youtu.be/XXXXXXXXXXX
-  const regExp = /^.*(?:youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=)([^#\&\?]*).*/;
-  const match = url.match(regExp);
-  return (match && match[1].length === 11) ? match[1] : null;
-}
 
     function submitVideo() {
       const link = document.getElementById('videoLink').value;
@@ -391,54 +393,36 @@ function getYouTubeID(url) {
       searchVideos();
     }
 
-function renderVideos(list) {
-  const container = document.getElementById('videoList');
-  container.innerHTML = '';
-  list.forEach(video => {
-    const card = document.createElement('div');
-    card.className = 'video-card';
+    function renderVideos(list) {
+      const container = document.getElementById('videoList');
+      container.innerHTML = '';
+      list.forEach((video, idx) => {
+        const card = document.createElement('div');
+        card.className = 'video-card';
+        card.innerHTML = `
+  <p><strong>Title:</strong> ${video.title}</p>
+  <p><a href="${video.link}" target="_blank">Watch Video</a></p>
+  <p>${video.desc}</p>
+  <p><strong>Subject:</strong> ${video.subject}</p>
+  <p><strong>Uploaded by:</strong> ${video.realName} (${video.owner})</p>
+  ${video.owner === currentUser
+    ? `<button onclick="deleteVideo(${idx})">Delete</button>`
+    : ``
+  }
+`;
 
-    let mediaHTML;
-
-    if (video.link.includes('embed')) {
-      // if they pasted a link that already has "embed" (like a Google Docs embed URL)
-      mediaHTML = `
-        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;">
-          <iframe
-            src="${video.link}"
-            frameborder="0"
-            allowfullscreen
-            style="position:absolute;top:0;left:0;width:100%;height:100%;">
-          </iframe>
-        </div>`;
-    } else {
-      // otherwise try YouTube ID
-      const id = getYouTubeID(video.link);
-      if (id) {
-        mediaHTML = `
-          <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;">
-            <iframe
-              src="https://www.youtube.com/embed/${id}"
-              frameborder="0"
-              allowfullscreen
-              style="position:absolute;top:0;left:0;width:100%;height:100%;">
-            </iframe>
-          </div>`;
-      } else {
-        // fallback: just a link
-        mediaHTML = `<p><a href="${video.link}" target="_blank">View Content</a></p>`;
-      }
+        container.appendChild(card);
+      });
     }
 
-    card.innerHTML = `
-      <p><strong>Title:</strong> ${video.title}</p>
-      ${mediaHTML}
-      <p>${video.desc}</p>
-      <p><strong>Subject:</strong> ${video.subject}</p>
-      <p><strong>Uploaded by:</strong> ${video.realName} (${video.owner})</p>
-    `;
-    container.appendChild(card);
-  });
+    function deleteVideo(index) {
+  // make sure only the uploader can delete
+  if (videos[index].owner !== currentUser) {
+    return alert('You can only delete your own videos');
+  }
+  // remove it and re-render
+  videos.splice(index, 1);
+  renderVideos(videos);
 }
 
   </script>
@@ -467,5 +451,3 @@ function renderVideos(list) {
 
 </body>
 </html>
-
-
