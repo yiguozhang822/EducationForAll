@@ -103,7 +103,7 @@
   <h2>EducationForAll.com</h2>
   <div class="tab">
     <button onclick="showTab('registerLogin')">Register/Login</button>
-    <button onclick="showTab('videoSubmit')">Submit Video</button>
+    <button onclick="showTab('submit')">Submit</button>
     <button onclick="showTab('searchVideos')">Search</button>
     <button onclick="showTab('categoryList')">Categories</button>
     <button onclick="showTab('aboutUs')">About Us</button>
@@ -122,7 +122,7 @@
     <p id="currentUserDisplay"></p>
   </div>
 
-  <div id="videoSubmit" class="section" style="display:none;">
+  <div id="submit" class="section" style="display:none;">
     <h3>Submit a Study Video</h3>
     <div class="form-control"><input class="input" id="videoLink" placeholder="Paste YouTube Link"></div>
     <div class="form-control"><input class="input" id="videoTitle" placeholder="Video Title"></div>
@@ -228,7 +228,7 @@
 </select>
 <!-- END: Class Dropdown Options -->
     </div>
-    <button onclick="submitVideo()">Submit Video</button>
+    <button onclick="submit()">Submit</button>
   </div>
 
  <!-- START: Category Buttons -->
@@ -340,7 +340,7 @@
     }
 
     function showTab(tabId) {
-      ['registerLogin', 'videoSubmit', 'searchVideos', 'categoryList', 'aboutUs'].forEach(id => {
+      ['registerLogin', 'submit', 'searchVideos', 'categoryList', 'aboutUs'].forEach(id => {
         document.getElementById(id).style.display = 'none';
       });
       document.getElementById(tabId).style.display = 'block';
@@ -364,7 +364,7 @@
       document.getElementById('currentUserDisplay').innerText = `Logged in as: ${u}`;
     }
 
-    function submitVideo() {
+    function submit() {
       const link = document.getElementById('videoLink').value;
       const title = document.getElementById('videoTitle').value;
       const desc = document.getElementById('videoDescription').value;
@@ -434,7 +434,7 @@
     this platform offers peer-made videos organized by course and topic.
   </p>
   <p>
-    Students can submit videos, browse by subject, and earn service hours for contributing helpful content.
+    Students can submit resources, browse by subject, and earn service hours for contributing helpful content.
   </p>
 <p>
      —Presented by East Priory Company©
@@ -451,3 +451,6 @@
 
 </body>
 </html>
+
+
+
