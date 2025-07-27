@@ -57,3 +57,8 @@ button {
     border-radius: 4px;
     cursor: pointer;
 }
+footer {
+    padding: 5px 20px;
+    text-align: left;
+    border-top: 2px solid white;
+}
