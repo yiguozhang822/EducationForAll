@@ -1,0 +1,25 @@
+### Config ignore ###
+*.env
+*.local
+*.env.local
+*.dev
+*.id
+*.der
+*.pem
+*.key
+*.crt
+data/
+
+### VS Code ###
+*.vscode/
+*.code-workspace
+*.csproj
+test/*
+tests/*
+
+### Mac ###
+.DS_Store
+*/**.DS_Store
+
+### Sensitive scripts ###
+backend.php
